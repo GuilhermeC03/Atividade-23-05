@@ -1,0 +1,60 @@
+#include <clocale>
+#include <iostream>
+
+using namespace std;
+
+int Trocas(char letAnt, char letPost, char *PEntrada, char *PSaida) {
+	int result = 0;
+	if (*PEntrada == letAnt) {
+		PSaida = &letPost;
+	}
+	if (*PSaida == letPost) {
+		result = result + 1;
+	}
+
+	return result;
+}
+
+int main() {
+	int qtd1;
+	char letAnt;
+	char letPost;
+	char *PEntrada;
+	char *PSaida;
+	int aux = 0;
+
+	cout << "Quantidade de caracteres em sua mensagem: " << endl;
+	cin >> qtd1;
+	char vetEntrada[qtd1];
+
+	cout << "Escreva sua mensagem(DIGITO POR DÍGITO): " << endl;
+
+	for (int i = 0; i < qtd1; i++) {
+		cout << "Escreva o " << i + 1 << "º caractere" << endl;
+		cin >> vetEntrada[i];
+	}
+	cout << "Digite o caractere que será substituído :" << endl;
+	cin >> letAnt;
+	cout << "Digite o caractere substituto :" << endl;
+	cin >> letPost;
+	cout << "A mensagem inical foi: ";
+	for (int i = 0; i < qtd1; i++) {
+		PEntrada = &vetEntrada[i];
+		cout << *PEntrada;
+	}
+	cout << endl << "A mensagem final é : ";
+	for (int i = 0; i < qtd1; i++) {
+		PSaida = &vetEntrada[i];
+		if (vetEntrada[i] == letAnt) {
+			PSaida = &letPost;
+		}
+		cout << *PSaida;
+	}
+	cout << endl << "O número de trocas : ";
+	for (int i = 0; i < qtd1; i++) {
+		PEntrada = &vetEntrada[i];
+		PSaida = &vetEntrada[i];
+		aux = Trocas(letAnt, letPost, PEntrada, PSaida) + aux;
+	}
+	cout << aux;
+}
